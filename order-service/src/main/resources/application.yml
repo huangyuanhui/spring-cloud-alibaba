@@ -14,6 +14,15 @@ spring:
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848 # nacos注册中心地址
+      discovery:
+        cluster-name: HZ  # 配置集群名称，也就是机房位置，例如：HZ，杭州
+        # namespace: ff0fc139-a5a3-461f-8b36-d0fc1f67a264  # 配置命名空间：dev环境
+        # ephemeral: false  # 把实例设置成非临时实例
+
+#需改负载均衡规则：优先访问同集群的实例
+user-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
 
 # mybatis-plus
 mybatis-plus:

@@ -14,6 +14,9 @@ spring:
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848 # nacos注册中心地址
+      discovery:
+        cluster-name: HZ # 配置集群名称，也就是机房位置，例如：HZ，杭州
+        #cluster-name: SZ # 配置集群名称，也就是机房位置，例如：SZ，深圳
 
 # mybatis-plus
 mybatis-plus:
