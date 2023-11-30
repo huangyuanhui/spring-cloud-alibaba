@@ -16,10 +16,13 @@ public class OrderApplication {
 
 
     /**
-     * 使用RestTemplate实现服务远程调用
+     * 负载均衡
      * @return
      */
     @LoadBalanced
+    /**
+     * 使用RestTemplate实现服务远程调用
+     */
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
