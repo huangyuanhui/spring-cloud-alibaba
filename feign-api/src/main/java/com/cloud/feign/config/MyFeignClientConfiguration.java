@@ -1,4 +1,4 @@
-package com.cloud.order.config;
+package com.cloud.feign.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

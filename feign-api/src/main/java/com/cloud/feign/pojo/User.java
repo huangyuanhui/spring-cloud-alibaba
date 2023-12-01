@@ -1,4 +1,4 @@
-package com.cloud.order.pojo;
+package com.cloud.feign.pojo;
 
 import lombok.Data;
 
