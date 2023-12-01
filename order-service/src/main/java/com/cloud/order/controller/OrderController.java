@@ -1,5 +1,6 @@
 package com.cloud.order.controller;
 
+import com.cloud.order.clients.UserClient;
 import com.cloud.order.pojo.Order;
 import com.cloud.order.pojo.User;
 import com.cloud.order.service.IOrderService;
@@ -17,14 +18,20 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+    //@Autowired
+    //private RestTemplate restTemplate;
+
     @Autowired
-    private RestTemplate restTemplate;
+    private UserClient userClient;
 
     @GetMapping("/{id}")
     public Order getById(@PathVariable("id") Long id) {
         Order order = orderService.getById(id);
-        User user =
-                restTemplate.getForObject("http://user-service/users/" + order.getUserId(), User.class);
+        // 使用RestTemplate发起远程调用
+        //String url = "http://user-service/users/" + order.getUserId();
+        //User user = restTemplate.getForObject(url, User.class);
+        // 使用Feign发起远程调用
+        User user = userClient.findById(order.getUserId());
         order.setUser(user);
         return order;
     }

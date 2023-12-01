@@ -41,3 +41,10 @@ logging:
     com.cloud.order: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+
+
+#feign:
+#  client:
+#    config:
+#      default:
+#        loggerLevel: FULL
