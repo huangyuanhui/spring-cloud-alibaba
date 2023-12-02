@@ -15,13 +15,34 @@ spring:
           uri: lb://order-service # 路由的目标地址，lb就是负载均衡（所以新版本要加负载均衡依赖），后面跟服务名称
           predicates: # 路由断言，也就是判断请求是否符合路由规则的条件，符合就路由到上面的uri
             - Path=/orders/**  # 这个按按照路径匹配，只要是以 /user/ 开头就符合要求
-            #- After=2031-04-13T15:14:47.433+08:00[Asia/Shanghai] # 要求时间在这个之后，并且路径是/user/开头
-            - Before=2023-12-02T15:14:47.433+08:00[Asia/Shanghai]  # 要求时间在这个之前，并且路径是/user/开头
+            # - After=2031-04-13T15:14:47.433+08:00[Asia/Shanghai] # 要求时间在这个之后，并且路径是/user/开头
+            # - Before=2023-12-02T15:14:47.433+08:00[Asia/Shanghai]  # 要求时间在这个之前，并且路径是/user/开头
 
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/users/**
+          # filters:  # 网关路由过滤器
+            # - AddRequestHeader=Truth,spring cloud is freaking awesome # 添加请求头Truth
+
+      default-filters:  # 默认过滤器，会对所有的路由请求都生效
+        - AddRequestHeader=Truth,spring cloud is freaking awesome # 添加请求头Truth
+
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':  # 凡是进入网关的一些请求都做跨域处理
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:8090"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
 
 logging:
   level:
