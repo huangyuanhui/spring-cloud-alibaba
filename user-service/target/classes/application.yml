@@ -8,7 +8,8 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/cloud_user?useSSL=true
+      # url: jdbc:mysql://localhost:3306/cloud_user?useSSL=true
+      url: jdbc:mysql://mysql:3306/cloud_user?useSSL=true
       username: root
       password: 1234
 #  cloud:
@@ -32,7 +33,8 @@ mybatis-plus:
 # 日志
 logging:
   level:
-    com.cloud.user: debug
+    # com.cloud.user: debug
+    com.cloud.user: error
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
 
